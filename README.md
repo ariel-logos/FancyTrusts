@@ -38,6 +38,8 @@ No compatibility issues found so far.
 ```/addon unload FancyTrusts``` Unloads the add-on from Ashita.
 
 ```/trusts``` Shows/hides the FancyTrusts UI. (Works better with a keybind in Ashita)
+
+```/trusts pX``` Where X is a number from 1 to 5, in-game line command to summon a preset from 1 to 5.
 <br></br>
 #### Trusts tab
 This tab displays the list of your currently available trusts. It is possible to scroll, while hovering with the mouse cursor, in order to explore the full list.\
