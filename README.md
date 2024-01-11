@@ -1,5 +1,5 @@
 # FancyTrusts
-$${\textsf{\color{lightgreen}Direct \space summon}}$$ 
+${\textsf{\color{lightgreen}Direct \space summon}}$
 ### What is it?
 FancyTrusts is an add-on for FFXI's third-party loader and hook Ashita (https://www.ashitaxi.com/).
 
