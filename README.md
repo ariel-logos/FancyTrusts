@@ -17,7 +17,7 @@ The add-on works in 2 main modes:
 	<li><b>Preset summon: </b>clicking un trusts buttons will add/remove them from the selected preset.</li>
 </ul>
 
-For more details read the Functionalities section.
+For more details see the Functionalities section further below.
 
 ![Mode 1](https://github.com/ariel-logos/FancyTrusts/assets/78350872/bb3bac77-ef96-488c-803b-f85179cf42e7) | ![Mode 2](https://github.com/ariel-logos/FancyTrusts/assets/78350872/aa9f98a2-784f-4993-9de9-06d9cf3aa8e4)
 :------------------|------------------
@@ -40,32 +40,18 @@ No compatibility issues found so far.
 ```/trusts``` Shows/hides the FancyTrusts UI. (Works better with a keybind in Ashita)
 <br></br>
 #### Trusts tab
-This tab allows you to select which skill you want to have the "blinking" alert effect to better highlight those relevant for you.\
-You can obviously select multiple skills on which to apply the blinking effect.\
-Everything set here is saved in the preferences.
-<ol>
-  <li><b>Search:</b> textbox that you can use to quickly look up mobs' skills in the Skills list (Fig.2).</li>
-  <li><b>Skills:</b> list of mobs' skills, select the one you want to filter to add the blinking effect.</li>
-  <li><b>Enable:</b> after selecting a skill you can use this toggle checkbox to enable or disable the blinking effect for that skill.</li>
-  <li><b>Show Enabled only:</b> toggle checkbox to quickly show in the Skills list only the skill for which the blinking effect is enabled.</li>
-  <li><b>Disable All:</b> button to quickly remove the check mark from the Enabled checkbox from ALL the skills effectively resetting the list.</li>
-  <li><b>Custom Filter:</b> textbox to quickly add custom text to match against the name of the skills used by mobs (Fig.3) (e.g. Writing "Toss" and enabling the checkbox will add the blinking effect on all the skills containing the word Toss). This text is case sensitive!!!</li>
-</ol>
+This tab displays the list of your currently available trusts. It is possible to scroll, while hovering with the mouse cursor, in order to explore the full list.\
+Additionally, it provides the possibility to create 5 different presets, using the circle-shaped checkboxes numbered from 1 to 5 on the right side.
 
-![1](https://github.com/ariel-logos/SkillWatch/assets/78350872/3d8a14e9-b8dd-4227-99ba-6369b511ba29)|![2](https://github.com/ariel-logos/SkillWatch/assets/78350872/19ce8c78-9851-4424-8e82-8aea4f1c43cd)|![3](https://github.com/ariel-logos/SkillWatch/assets/78350872/31aee711-072d-400a-a867-e8180ccfdd5a)
-:-------------------------|-------------------------|-------------------------
-Fig. 1          |  Fig. 2           | Fig. 3 
-#### Settings tab
-In this tab you can adjust several add-on settings, in particular:
+When no checkboxes are selected, the UI is in <b>Direct summon mode</b>. This means that, by clicking any button with a trust name, the UI will immediatly attempt to summon that trust in the game. When one of the checkboxes is selected, the UI is in <b>Preset summon mode</b>. In this mode, clicking the buttons with trusts names, will add them (or remove them if they have been added previously) to the preset selected by the checkbox. The trusts in a preset will display a different button color. When in <b>Preset summon mode</b>, there's a new button available: the <b>Summon</b> button. When, clicking this button, the UI will attempt to summon the trusts in the selected preset one after another in a classic macro fashion. While summoning, the button <b>Summon</b> button will change into a <b>Stop</b> button. If this last one is pressed, the UI will stop the sequence of summoning trusts at the earliest convenience.
+
+#### Config tab
+In this tab you can adjust few add-on settings, in particular:
 <ol>
-  <li><b>Size:</b> sets the size of the overlay.</li>
-  <li><b>BG Transparency:</b> sets the transparency of the background box.</li>
-  <li><b>Blinking RGB:</b> using the 3 sliders R,G,B below, sets the color of the blinking effect.</li>
-  <li><b>Blinking Speed:</b> sets the rate at which the text background to notify incoming skills set in the Filters tab.</li>
-  <li><b>Only trigger on filtered skills:</b> the overlay will only appear when one of the selected skills in the Filters tab is being used by the enemy mob.</li>
-  <li><b>Right justified:</b> the text and background box will resize expanding towards the left (default: right).</li>
-  <li><b>Ignore non-custom filter:</b> the overlay will only appear when the text in the Custom Filter textbox set Filters tab is recognized. Ignores other selected filter from the Skills list.</li>
-  <li><b>Hide timer bar:</b> hides the bar appearing at the bottom of the text showing the time since the skill detection.</li>
+  <li><b>Slow Mode:</b> this increases the delay between the summoning of trusts while in summoning in  <b>Preset summon mode</b>. Very useful when your casting time is slowed down (e.g. while under the effect of SAM's ability Hasso)</li>
+  <li><b>Selected On Top:</b> when in <b>Preset summon mode</b>, shows the trusts buttons in the selected preset at the top of the list.</li>
+  <li><b>Max Trusts:</b> set this to the maximum number of trusts you are allowed to summon. This will prevent the preset to contain more trusts than you can use.</li>
+  <li><b>UI Scale:</b> changes the scale of the FancyTrusts UI.</li>
 </ol>
 
 
