@@ -61,6 +61,13 @@ local buttonColorStylesPreset = {
 	T{ImGuiCol_ButtonHovered,        {139/255, 103/255, 163/255, 1.0}},
 }
 
+local buttonColorStylesLocked = {
+	T{ImGuiCol_Text,                 {1.0, 1.0, 1.0, 1.0}},  
+	T{ImGuiCol_Button,               {70/255, 70/255, 70/255, 1.0}},              
+	T{ImGuiCol_ButtonActive,         {95/255, 95/255, 95/255, 1.0}},              
+	T{ImGuiCol_ButtonHovered,        {90/255, 90/255, 90/255, 1.0}},
+}
+
 local buttonVarStyles = {
 	
 	
@@ -191,8 +198,9 @@ if (ui.currentConfig.isVisible) then
 			end
 			
 			if (isButtonPreset) then PushColorStyles(buttonColorStylesPreset); end
-			
+			if (summoning)  then PushColorStyles(buttonColorStylesLocked); end
 			if (imgui.Button(ui.trustList[drawIdx],buttonSize)) then
+			if (not summoning) then
 				if (not ui.currentConfig.preset[1] and not ui.currentConfig.preset[2] and not ui.currentConfig.preset[3] and not ui.currentConfig.preset[4] and not ui.currentConfig.preset[5]) then
 					AshitaCore:GetChatManager():QueueCommand(1, string.format('/ma \"%s\" <me>',ui.trustList[drawIdx]));
 				else
@@ -211,9 +219,11 @@ if (ui.currentConfig.isVisible) then
 						end
 					end
 					save_settings();
-				end			
+				end
+		
 			end
-			
+			end
+			if (summoning)  then PopColorStyles(buttonColorStylesLocked); end
 			if (isButtonPreset) then PopColorStyles(buttonColorStylesPreset); end
 			idx1 = idx1 +1;
 		end	
@@ -241,8 +251,9 @@ if (ui.currentConfig.isVisible) then
 			end
 			
 			if (isButtonPreset) then PushColorStyles(buttonColorStylesPreset); end
-			
+			if (summoning)  then PushColorStyles(buttonColorStylesLocked); end
 			if (imgui.Button(ui.trustList[drawIdx],buttonSize)) then
+			if (not summoning) then
 				if (not ui.currentConfig.preset[1] and not ui.currentConfig.preset[2] and not ui.currentConfig.preset[3] and not ui.currentConfig.preset[4] and not ui.currentConfig.preset[5]) then
 					AshitaCore:GetChatManager():QueueCommand(1, string.format('/ma \"%s\" <me>',ui.trustList[drawIdx]));
 				else
@@ -263,7 +274,8 @@ if (ui.currentConfig.isVisible) then
 					save_settings();
 				end			
 			end
-			
+			end 
+			if (summoning)  then PopColorStyles(buttonColorStylesLocked); end
 			if (isButtonPreset) then PopColorStyles(buttonColorStylesPreset); end
 			idx2 = idx2 +1;
 		end	
@@ -475,10 +487,19 @@ ashita.events.register('command', 'command_cb', function (e)
 
     e.blocked = true;
 
-    if (#args >= 1) then
+    if (#args == 1) then
         ui.currentConfig.isVisible = not ui.currentConfig.isVisible;
+		save_settings();
         return;
     end
+	
+	for p = 1,5 do
+		if (#args == 2 and args[2]:any(string.format('p%s', p))) then
+			if (not summoning) then summoningTable = p; summoning = true; end
+			return;
+		end
+    end
+	return;
 end);
 
 function dec2Hex(decimal)
