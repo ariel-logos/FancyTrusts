@@ -19,8 +19,7 @@ The add-on works in 2 main modes:
 
 For more details read the Functionalities section.
 
-![Mode 1](https://github.com/ariel-logos/FancyTrusts/assets/78350872/bb3bac77-ef96-488c-803b-f85179cf42e7)
-  | ![Mode 2](https://github.com/ariel-logos/FancyTrusts/assets/78350872/aa9f98a2-784f-4993-9de9-06d9cf3aa8e4)
+![Mode 1](https://github.com/ariel-logos/FancyTrusts/assets/78350872/bb3bac77-ef96-488c-803b-f85179cf42e7) | ![Mode 2](https://github.com/ariel-logos/FancyTrusts/assets/78350872/aa9f98a2-784f-4993-9de9-06d9cf3aa8e4)
 :------------------|------------------
 Direct summon mode | Preset summon mode
 
