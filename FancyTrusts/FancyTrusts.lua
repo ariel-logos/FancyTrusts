@@ -181,7 +181,7 @@ if (ui.currentConfig.isVisible) then
 			
 			local c = math.fmod(idx1-1,ui.currentConfig.cols);
 			local r = math.floor((idx1-1)/2);
-			imgui.SetCursorPos({c*ui.buttonW*ui.currentConfig.scale+ui.buttonP,r*ui.buttonH*ui.currentConfig.scale+(ui.buttonP+ui.navH)*ui.currentConfig.scale});
+			imgui.SetCursorPos({c*ui.buttonW*ui.currentConfig.scale+ui.buttonP+2,r*ui.buttonH*ui.currentConfig.scale+(ui.buttonP+ui.navH)*ui.currentConfig.scale});
 			
 			local isButtonPreset = false;
 			for p = 1,5 do
