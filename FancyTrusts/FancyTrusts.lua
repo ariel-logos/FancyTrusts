@@ -204,7 +204,8 @@ if (ui.currentConfig.isVisible) then
 							--debugtext = tostring(GetTableLen(ui.currentConfig.presetLists[p]));
 							table.insert(ui.currentConfig.presetLists[p],string.format('/ma \"%s\" <me>',ui.trustList[drawIdx]));
 						else 
-							if (FindInTable(ui.currentConfig.presetLists[p],string.format('/ma \"%s\" <me>',ui.trustList[drawIdx]))) then
+							if (ui.currentConfig.preset[p] and 
+							FindInTable(ui.currentConfig.presetLists[p],string.format('/ma \"%s\" <me>',ui.trustList[drawIdx]))) then
 								table.remove(ui.currentConfig.presetLists[p],FindInTable(ui.currentConfig.presetLists[p],string.format('/ma \"%s\" <me>',ui.trustList[drawIdx])));
 							end
 						end
@@ -253,7 +254,8 @@ if (ui.currentConfig.isVisible) then
 							--debugtext = tostring(GetTableLen(ui.currentConfig.presetLists[p]));
 							table.insert(ui.currentConfig.presetLists[p],string.format('/ma \"%s\" <me>',ui.trustList[drawIdx]));
 						else 
-							if (FindInTable(ui.currentConfig.presetLists[p],string.format('/ma \"%s\" <me>',ui.trustList[drawIdx]))) then
+							if (ui.currentConfig.preset[p] and
+							FindInTable(ui.currentConfig.presetLists[p],string.format('/ma \"%s\" <me>',ui.trustList[drawIdx]))) then
 								table.remove(ui.currentConfig.presetLists[p],FindInTable(ui.currentConfig.presetLists[p],string.format('/ma \"%s\" <me>',ui.trustList[drawIdx])));
 							end
 						end
@@ -370,7 +372,7 @@ if (ui.currentConfig.isVisible) then
 			ui.currentConfig.selectedMaxTrusts[3]=false;
 			for i = 1,5 do
 				local length = GetTableLen(ui.currentConfig.presetLists[i]);
-				for j = 4,length do
+				for j = 5,length do
 					table.remove(ui.currentConfig.presetLists[i],j);
 				end
 			end
@@ -385,7 +387,7 @@ if (ui.currentConfig.isVisible) then
 			ui.currentConfig.selectedMaxTrusts[3]=true;
 			for i = 1,5 do
 				local length = GetTableLen(ui.currentConfig.presetLists[i]);
-				for j = 4,length do
+				for j = 6,length do
 					table.remove(ui.currentConfig.presetLists[i],j);
 				end
 			end
