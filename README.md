@@ -54,7 +54,8 @@ In this tab you can adjust few add-on settings, in particular:
   <li><b>UI Scale:</b> changes the scale of the FancyTrusts UI.</li>
 </ol>
 
+![fancytrustsconfig](https://github.com/ariel-logos/FancyTrusts/assets/78350872/088691bf-e6a7-4e6d-9d41-968ff3b2137d)
 
 <p align="center">
-<a href="https://github.com/ariel-logos/SkillWatch/assets/78350872/726d83c8-ba8d-4cbe-89cb-9050527a8255"><img src="https://github.com/ariel-logos/SkillWatch/assets/78350872/726d83c8-ba8d-4cbe-89cb-9050527a8255.png" alt="SkillWatch Overlay"/></a>
+<img src="https://github.com/ariel-logos/FancyTrusts/assets/78350872/088691bf-e6a7-4e6d-9d41-968ff3b2137d" alt="FancyTrusts Config tab"/>
 </p>
