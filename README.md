@@ -1,5 +1,5 @@
 # FancyTrusts
-${\textsf{\color{lightgreen}{Direct summon}}}$
+
 ### What is it?
 FancyTrusts is an add-on for FFXI's third-party loader and hook Ashita (https://www.ashitaxi.com/).
 
@@ -13,8 +13,8 @@ This add-on uses ImGui to create an overlay that allows the player to easily per
 ### Main features
 The add-on works in 2 main modes:
 <ul>
-	<li><b> $${\textsf{\color{lightgreen}Direct \space summon}}$$ : </b>directly summons trusts when the relative buttons are clicked.</li>
-	<li><b> $${\textsf{\color{orange}Preset \space summon}}$$ : </b>clicking un trusts buttons will add/remove them from the selected preset.</li>
+	<li><b>${\textsf{\color{lightgreen}{Direct summon}}}$: </b>directly summons trusts when the relative buttons are clicked.</li>
+	<li><b>${\textsf{\color{orange}{Direct summon}}}$: </b>clicking un trusts buttons will add/remove them from the selected preset.</li>
 </ul>
 
 For more details see the Functionalities section further below.
