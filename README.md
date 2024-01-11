@@ -13,7 +13,7 @@ This add-on uses ImGui to create an overlay that allows the player to easily per
 ### Main features
 The add-on works in 2 main modes:
 <ul>
-	<li>${\textsf{\color{lightgreen}{Direct summon}}}$: directly summons trusts when the relative buttons are clicked.</li>
+	<li>${\textsf{\color{tealbule}{Direct summon}}}$: directly summons trusts when the relative buttons are clicked.</li>
 	<li>${\textsf{\color{orange}{Preset summon}}}$: clicking un trusts buttons will add/remove them from the selected preset.</li>
 </ul>
 
@@ -43,7 +43,7 @@ No compatibility issues found so far.
 This tab displays the list of your currently available trusts. It is possible to scroll, while hovering with the mouse cursor, in order to explore the full list.\
 Additionally, it provides the possibility to create 5 different presets, using the circle-shaped checkboxes numbered from 1 to 5 on the right side.
 
-When no checkboxes are selected, the UI is in ${\textsf{\color{lightgreen}{Direct summon}}}$. This means that, by clicking any button with a trust name, the UI will immediatly attempt to summon that trust in the game. When one of the checkboxes is selected, the UI is in ${\textsf{\color{orange}{Preset summon}}}$. In this mode, clicking the buttons with trusts names, will add them (or remove them if they have been added previously) to the preset selected by the checkbox. The trusts in a preset will display a different button color. When in ${\textsf{\color{orange}{Preset summon}}}$, there's a new button available: the ${\textsf{\color{green}{Summon}}}$ button. When, clicking this button, the UI will attempt to summon the trusts in the selected preset one after another in a classic macro fashion. While summoning, the button ${\textsf{\color{green}{Summon}}}$ button will change into a ${\textsf{\color{green}{Stop}}}$ button. If this last one is pressed, the UI will stop the sequence of summoning trusts at the earliest convenience.\
+When no checkboxes are selected, the UI is in ${\textsf{\color{tealbule}{Direct summon}}}$. This means that, by clicking any button with a trust name, the UI will immediatly attempt to summon that trust in the game. When one of the checkboxes is selected, the UI is in ${\textsf{\color{orange}{Preset summon}}}$. In this mode, clicking the buttons with trusts names, will add them (or remove them if they have been added previously) to the preset selected by the checkbox. The trusts in a preset will display a different button color. When in ${\textsf{\color{orange}{Preset summon}}}$, there's a new button available: the ${\textsf{\color{green}{Summon}}}$ button. When, clicking this button, the UI will attempt to summon the trusts in the selected preset one after another in a classic macro fashion. While summoning, the button ${\textsf{\color{green}{Summon}}}$ button will change into a ${\textsf{\color{red}{Stop}}}$ button. If this last one is pressed, the UI will stop the sequence of summoning trusts at the earliest convenience.\
 All edited presets are saved automatically.
 
 #### Config tab
