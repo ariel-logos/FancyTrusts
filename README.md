@@ -13,8 +13,8 @@ This add-on uses ImGui to create an overlay that allows the player to easily per
 ### Main features
 The add-on works in 2 main modes:
 <ul>
-	<li><b>Direct summon: </b>directly summons trusts when the relative buttons are clicked.</li>
-	<li><b>Preset summon: </b>clicking un trusts buttons will add/remove them from the selected preset.</li>
+	<li>${\textsf{\color{lime}{Direct summon}}}$: directly summons trusts when the relative buttons are clicked.</li>
+	<li>${\textsf{\color{orange}{Preset summon}}}$: clicking un trusts buttons will add/remove them from the selected preset.</li>
 </ul>
 
 For more details see the Functionalities section further below.
@@ -43,14 +43,14 @@ No compatibility issues found so far.
 This tab displays the list of your currently available trusts. It is possible to scroll, while hovering with the mouse cursor, in order to explore the full list.\
 Additionally, it provides the possibility to create 5 different presets, using the circle-shaped checkboxes numbered from 1 to 5 on the right side.
 
-When no checkboxes are selected, the UI is in <b>Direct summon mode</b>. This means that, by clicking any button with a trust name, the UI will immediatly attempt to summon that trust in the game. When one of the checkboxes is selected, the UI is in <b>Preset summon mode</b>. In this mode, clicking the buttons with trusts names, will add them (or remove them if they have been added previously) to the preset selected by the checkbox. The trusts in a preset will display a different button color. When in <b>Preset summon mode</b>, there's a new button available: the <b>Summon</b> button. When, clicking this button, the UI will attempt to summon the trusts in the selected preset one after another in a classic macro fashion. While summoning, the button <b>Summon</b> button will change into a <b>Stop</b> button. If this last one is pressed, the UI will stop the sequence of summoning trusts at the earliest convenience.\
+When no checkboxes are selected, the UI is in ${\textsf{\color{lime}{Direct summon}}}$. This means that, by clicking any button with a trust name, the UI will immediatly attempt to summon that trust in the game. When one of the checkboxes is selected, the UI is in ${\textsf{\color{orange}{Preset summon}}}$. In this mode, clicking the buttons with trusts names, will add them (or remove them if they have been added previously) to the preset selected by the checkbox. The trusts in a preset will display a different button color. When in ${\textsf{\color{orange}{Preset summon}}}$, there's a new button available: the <b>Summon</b> button. When, clicking this button, the UI will attempt to summon the trusts in the selected preset one after another in a classic macro fashion. While summoning, the button <b>Summo</b> button will change into a <b>Stop</b> button. If this last one is pressed, the UI will stop the sequence of summoning trusts at the earliest convenience.\
 All edited presets are saved automatically.
 
 #### Config tab
 In this tab you can adjust few add-on settings, in particular:
 <ol>
-  <li><b>Slow Mode:</b> this increases the delay between the summoning of trusts while in summoning in  <b>Preset summon mode</b>. Very useful when your casting time is slowed down (e.g. while under the effect of SAM's ability Hasso)</li>
-  <li><b>Selected On Top:</b> when in <b>Preset summon mode</b>, shows the trusts buttons in the selected preset at the top of the list.</li>
+  <li><b>Slow Mode:</b> this increases the delay between the summoning of trusts while in summoning in  ${\textsf{\color{orange}{Preset summon}}}$. Very useful when your casting time is slowed down (e.g. while under the effect of SAM's ability Hasso)</li>
+  <li><b>Selected On Top:</b> when in ${\textsf{\color{orange}{Preset summon}}}$, shows the trusts buttons in the selected preset at the top of the list.</li>
   <li><b>Max Trusts:</b> set this to the maximum number of trusts you are allowed to summon. This will prevent the preset to contain more trusts than you can use.</li>
   <li><b>UI Scale:</b> changes the scale of the FancyTrusts UI.</li>
 </ol>
