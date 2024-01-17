@@ -55,6 +55,7 @@ In this tab you can adjust few add-on settings, in particular:
   <li><b>Selected On Top:</b> when in ${\textsf{\color{orange}{Preset summon}}}$, shows the trusts buttons in the selected preset at the top of the list.</li>
   <li><b>Max Trusts:</b> set this to the maximum number of trusts you are allowed to summon. This will prevent the preset to contain more trusts than you can use.</li>
   <li><b>UI Scale:</b> changes the scale of the FancyTrusts UI.</li>
+  <li><b>*NEW* Handheld Mode:</b> enables navigation buttons for handheld device that don't feature a scroll input to navigate the Trust's list. Please mind that, in this mode, the Selected On Top feature is automatically disabled for compatibility issues.</li>
 </ol>
 <p align="center">
 <img src="https://github.com/ariel-logos/FancyTrusts/assets/78350872/088691bf-e6a7-4e6d-9d41-968ff3b2137d" alt="FancyTrusts Config tab"/>
