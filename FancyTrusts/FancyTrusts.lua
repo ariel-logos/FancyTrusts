@@ -1,6 +1,6 @@
-addon.name      = 'FancyTrusts';
+﻿addon.name      = 'FancyTrusts';
 addon.author    = 'Arielfy';
-addon.version   = '0.2';
+addon.version   = '0.3';
 addon.desc      = 'A fancy UI to manage trusts.';
 addon.link      = '';
 
@@ -11,7 +11,6 @@ local fonts = require('fonts');
 local settings = require('settings');
 local ffi = require('ffi');
 local prims = require('primitives');
-
 
 local cfg = T{
 
@@ -26,6 +25,7 @@ local cfg = T{
 	slowMode  = T{false},
 	selectedMaxTrusts = T{true, false, false},
 	presetOnTop = T{false},
+	handheldMode = T{false}
 }
 
 local ui = {
@@ -39,8 +39,11 @@ local ui = {
 	buttonH = 40,
 	buttonP = 2,
 	navH = 50,
+	navPadding = 50,
+	idxOffset = 0,
 	presetBoxW = 70,
 	customFont,
+	customFont2,
 }
 
 local buttonColorStylesNormal = {
@@ -138,6 +141,7 @@ function GetTrusts()
 			--imgui.TextColored({ 1.0, 1.0, 1.0, 1.0 }, tostring(spell.Name[1]))					
 		end
 	end			
+
 	ui.trustList = tmp;
 	table.sort(ui.trustList);
 end
@@ -152,8 +156,8 @@ if (ui.currentConfig.isVisible) then
 	
 	
 	local old_scale = ui.customFont.Scale;
-	ui.customFont.Scale = ui.customFont.Scale * ui.currentConfig.scale;
-	
+	ui.customFont.Scale = ui.customFont.Scale * ui.currentConfig.scale - 0.27+(0.27*ui.currentConfig.scale);
+	--debugtext = tostring(ui.customFont.Scale);
 	imgui.PushFont(ui.customFont);
 	
 	PushColorStyles(buttonColorStylesNormal);
@@ -161,23 +165,59 @@ if (ui.currentConfig.isVisible) then
 	imgui.PushStyleVar(ImGuiStyleVar_FrameRounding,		20*ui.currentConfig.scale);
 	imgui.PushStyleVar(ImGuiStyleVar_ButtonTextAlign,	{0.5,0});
 	
-	ui.width = ui.currentConfig.cols*ui.buttonW*ui.currentConfig.scale+(ui.presetBoxW)*ui.currentConfig.scale;
+	if(ui.currentConfig.handheldMode[1]) then ui.navPadding = 65; else ui.navPadding = 0; end
+	
+	ui.width = ui.currentConfig.cols*ui.buttonW*ui.currentConfig.scale+(ui.presetBoxW)*ui.currentConfig.scale+ui.navPadding;
 	ui.height = ui.currentConfig.rows*ui.buttonH*ui.currentConfig.scale+ui.navH*ui.currentConfig.scale;
 	--ImGuiWindowFlags_NoNav
-	--ImGuiWindowFlags_NoBackground,
+	--ImGuiWindowFlags_NoBackground,ImGuiWindowFlags_NoFocusOnAppearing
 	imgui.SetNextWindowSize({ ui.width, ui.height }, ImGuiCond_Always);
-	local windowFlags = bit.bor(ImGuiWindowFlags_NoDecoration, ImGuiWindowFlags_NoResize, ImGuiWindowFlags_NoFocusOnAppearing, ImGuiWindowFlags_NoBackground, ImGuiWindowFlags_NoBringToFrontOnFocus);
+	local windowFlags = bit.bor(ImGuiWindowFlags_NoDecoration, ImGuiWindowFlags_NoResize ,ImGuiWindowFlags_NoBackground, ImGuiWindowFlags_NoBringToFrontOnFocus, ImGuiWindowFlags_NoFocusOnAppearing);
 	if (imgui.Begin('TrustsUI', ui.currentConfig.isVisible, windowFlags)) then
 	if (imgui.BeginTabBar('##trustsui_tabbar', ImGuiTabBarFlags_NoCloseWithMiddleMouseButton)) then
 	if (imgui.BeginTabItem('Trusts', nil)) then
 	
-	if (not previousFrameVisible and ui.currentConfig.isVisible) then imgui.SetScrollHereY(0); end	
+	if (not previousFrameVisible and ui.currentConfig.isVisible) then imgui.SetScrollHereY(0); end
+
+	if (ui.currentConfig.handheldMode[1]) then
+	
+	local offset2 = imgui.GetScrollY()/ui.currentConfig.scale;
+		imgui.SetCursorPos({ui.width-(15/ui.currentConfig.scale*0.4)-((ui.navPadding)*ui.currentConfig.scale)+ui.buttonP+15*ui.currentConfig.scale,((ui.navH+ui.buttonP*2)+offset2)*ui.currentConfig.scale});
+	
+	local prevScale2 = ui.customFont2.Scale;
+	ui.customFont2.Scale = ui.customFont2.Scale * ui.currentConfig.scale* ui.currentConfig.scale/(ui.currentConfig.scale*2);
+	imgui.PushFont(ui.customFont2);
+	imgui.PushStyleVar(ImGuiStyleVar_ButtonTextAlign, {0.5,0.5})
+	imgui.PushStyleVar(ImGuiStyleVar_FrameRounding,		10*ui.customFont2.Scale);
+
+
+	if (imgui.Button('/\\',{44*ui.currentConfig.scale+10-(5*ui.currentConfig.scale),60*ui.currentConfig.scale})) then
+		ui.idxOffset = ui.idxOffset -2;
+		if (ui.idxOffset < 0) then ui.idxOffset = 0; end
+	end
+	
+	imgui.SetCursorPos({ui.width-(15/ui.currentConfig.scale*0.4)-((ui.navPadding)*ui.currentConfig.scale)+ui.buttonP+15*ui.currentConfig.scale,ui.height-((ui.navH)+25-offset2)*ui.currentConfig.scale});
+	
+	if (imgui.Button('\\/',{44*ui.currentConfig.scale+10-(5*ui.currentConfig.scale),60*ui.currentConfig.scale})) then
+		ui.idxOffset = ui.idxOffset +2;
+		if (ui.idxOffset > ui.listLen-13) then ui.idxOffset =ui.idxOffset - 2; end
+	end
+
+	--debugtext = tostring(ui.idxOffset);
+	
+	ui.customFont2.Scale = prevScale2;
+	imgui.PopStyleVar();
+	imgui.PopStyleVar();
+	imgui.PopFont();
+	
+	end
 	
 		--imgui.Text('hello');
+		
 		local buttonSize = {ui.buttonW*ui.currentConfig.scale-ui.buttonP*2, ui.buttonH*ui.currentConfig.scale-ui.buttonP*2};
 		
 		local idx1 = 1;
-		for drawIdx = 1, ui.listLen do
+		for drawIdx = 1+ui.idxOffset, ui.listLen do
 		local isInPreset = false;
 		for p = 1,5 do
 			if (ui.currentConfig.preset[p] and FindInTable(ui.currentConfig.presetLists[p],string.format('/ma \"%s\" <me>',ui.trustList[drawIdx]))) then
@@ -230,7 +270,7 @@ if (ui.currentConfig.isVisible) then
 		end
 		
 		local idx2 = idx1;
-		for drawIdx = 1, ui.listLen do
+		for drawIdx = 1+ui.idxOffset, ui.listLen do
 		local isInPreset2 = false;
 		for p = 1,5 do
 			if (ui.currentConfig.preset[p] and FindInTable(ui.currentConfig.presetLists[p],string.format('/ma \"%s\" <me>',ui.trustList[drawIdx]))) then
@@ -288,9 +328,10 @@ if (ui.currentConfig.isVisible) then
 	
 	
 	local offset = imgui.GetScrollY()/ui.currentConfig.scale;
-
+	
+	
 	imgui.PushStyleColor(ImGuiCol_Text, {1.0, 1.0, 1.0, 1.0}); 
-	imgui.SetCursorPos({ui.width-((ui.presetBoxW-5)*ui.currentConfig.scale)+ui.buttonP*ui.currentConfig.scale,((ui.navH+ui.buttonP*2)+offset)*ui.currentConfig.scale});
+	imgui.SetCursorPos({ui.width-((ui.presetBoxW-5)*ui.currentConfig.scale)+ui.buttonP*ui.currentConfig.scale-ui.navPadding,((ui.navH+ui.buttonP*2)+offset)*ui.currentConfig.scale});
 	for i = 1,5 do
 	
 
@@ -301,11 +342,11 @@ if (ui.currentConfig.isVisible) then
 			for r = 1,4 do ui.currentConfig.preset[l[r]] = false; end
 			save_settings();
 		end
-		imgui.SetCursorPos({ui.width-((ui.presetBoxW-5)*ui.currentConfig.scale)+ui.buttonP,(ui.navH+((i+0.1)*39)+offset)*ui.currentConfig.scale});
+		imgui.SetCursorPos({ui.width-((ui.presetBoxW-5)*ui.currentConfig.scale)+ui.buttonP-ui.navPadding,(ui.navH+((i+0.1)*39)+offset)*ui.currentConfig.scale});
 	end
 	imgui.PopStyleColor();
 	
-	imgui.SetCursorPos({ui.width-(ui.presetBoxW*ui.currentConfig.scale)+ui.buttonP,(ui.navH*5.0+offset)*ui.currentConfig.scale});
+	imgui.SetCursorPos({ui.width-(ui.presetBoxW*ui.currentConfig.scale)+ui.buttonP-ui.navPadding,(ui.navH*5.0+offset)*ui.currentConfig.scale});
 	
 	
 	for p = 1,5 do
@@ -345,7 +386,7 @@ if (ui.currentConfig.isVisible) then
 	imgui.Text(' ');
 	
 	if (imgui.BeginTabItem('Config', nil)) then
-	imgui.PushStyleVar(ImGuiStyleVar_ItemSpacing, {0, 20});	
+	imgui.PushStyleVar(ImGuiStyleVar_ItemSpacing, {0, 10*ui.currentConfig.scale});	
 
 	imgui.PushStyleColor(ImGuiCol_Text, {1.0, 1.0, 1.0, 1.0}); 
 	
@@ -358,6 +399,19 @@ if (ui.currentConfig.isVisible) then
 		imgui.SameLine();
 		if (imgui.Checkbox('Selected On Top',{ui.currentConfig.presetOnTop[1]})) then
 			ui.currentConfig.presetOnTop[1] = not ui.currentConfig.presetOnTop[1];
+			save_settings();
+		end
+		--imgui.SameLine();
+		--imgui.Text(' ');
+		--imgui.SameLine();
+		if (imgui.Checkbox('Handheld Mode',{ui.currentConfig.handheldMode[1]})) then
+			ui.currentConfig.handheldMode[1] = not ui.currentConfig.handheldMode[1];
+			if (ui.currentConfig.handheldMode[1]) then
+				imgui.SetScrollHereY(0);
+				ui.currentConfig.presetOnTop[1] = false;
+			else
+				ui.idxOffset = 0;
+			end
 			save_settings();
 		end
 		imgui.PopStyleVar(1);
@@ -391,7 +445,7 @@ if (ui.currentConfig.isVisible) then
 			save_settings();
 		end
 		imgui.SameLine();
-		imgui.PushStyleVar(ImGuiStyleVar_ItemSpacing, {0, 20});	
+		imgui.PushStyleVar(ImGuiStyleVar_ItemSpacing, {0, 10*ui.currentConfig.scale});	
 		if (imgui.Checkbox('5',{ui.currentConfig.selectedMaxTrusts[3]})) then
 			ui.currentConfig.maxTrusts = 5;
 			ui.currentConfig.selectedMaxTrusts[1]=false;
@@ -410,7 +464,7 @@ if (ui.currentConfig.isVisible) then
 		
 		imgui.PushStyleColor(ImGuiCol_FrameBgActive,  {0.8, 0.8, 0.8, 1.0});
 		local S = T{ui.currentConfig.scale*2};
-		if (imgui.SliderFloat('  ', S, 1.5, 3, '%0.1f')) then
+		if (imgui.SliderFloat('  ', S, 1, 3, '%0.1f')) then
 			ui.currentConfig.scale = S[1]/2;
 			save_settings();
 		end
@@ -466,7 +520,7 @@ ashita.events.register('load', 'load_cb', function ()
 
 	ui.currentConfig = settings.load(cfg, 'cfg');
 	ui.customFont = imgui.AddFontFromFileTTF(addon.path..'/fonts/CarroisGothicSC-Regular.ttf',30);
-	
+	ui.customFont2 = imgui.AddFontFromFileTTF(addon.path..'/fonts/calibri.ttf',30);
 	
 	
 end);
