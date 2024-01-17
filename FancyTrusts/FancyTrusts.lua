@@ -2,7 +2,7 @@
 addon.author    = 'Arielfy';
 addon.version   = '0.3';
 addon.desc      = 'A fancy UI to manage trusts.';
-addon.link      = '';
+addon.link      = 'https://github.com/ariel-logos/FancyTrusts';
 
 
 require('common');
@@ -398,7 +398,9 @@ if (ui.currentConfig.isVisible) then
 		imgui.Text(' ');
 		imgui.SameLine();
 		if (imgui.Checkbox('Selected On Top',{ui.currentConfig.presetOnTop[1]})) then
-			ui.currentConfig.presetOnTop[1] = not ui.currentConfig.presetOnTop[1];
+			if( not ui.currentConfig.handheldMode[1]) then
+				ui.currentConfig.presetOnTop[1] = not ui.currentConfig.presetOnTop[1];
+			end
 			save_settings();
 		end
 		--imgui.SameLine();
