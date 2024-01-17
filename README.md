@@ -58,5 +58,5 @@ In this tab you can adjust few add-on settings, in particular:
   <li><b>*NEW* Handheld Mode:</b> enables navigation buttons for handheld device that don't feature a scroll input to navigate the Trust's list. Please mind that, in this mode, the Selected On Top feature is automatically disabled for compatibility issues.</li>
 </ol>
 <p align="center">
-<img src="https://github.com/ariel-logos/FancyTrusts/assets/78350872/088691bf-e6a7-4e6d-9d41-968ff3b2137d" alt="FancyTrusts Config tab"/>
+<img src="https://github.com/ariel-logos/FancyTrusts/assets/78350872/c308832d-1895-4826-b628-d6f8c6f72d7c" alt="FancyTrusts Config tab"/>
 </p>
