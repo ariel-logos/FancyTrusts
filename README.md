@@ -14,7 +14,7 @@ This add-on uses ImGui to create an overlay that allows the player to easily per
 The add-on works in 2 main modes:
 <ul>
 	<li>${\textsf{\color{lime}{Direct summon}}}$: directly summons trusts when the relative buttons are clicked.</li>
-	<li>${\textsf{\color{orange}{Preset summon}}}$: clicking un trusts buttons will add/remove them from the selected preset.</li>
+	<li>${\textsf{\color{orange}{Preset summon}}}$: clicking on trusts buttons will add/remove them from the selected preset.</li>
 </ul>
 
 For more details see the Functionalities section further below.
