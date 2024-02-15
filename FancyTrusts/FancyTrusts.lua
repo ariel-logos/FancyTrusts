@@ -141,9 +141,35 @@ function GetTrusts()
 			--imgui.TextColored({ 1.0, 1.0, 1.0, 1.0 }, tostring(spell.Name[1]))					
 		end
 	end			
-
+	local old_list = ui.tustList;
+	local fix = false;
+	for i = 1, GetTableLen(old_list) do
+		if tmp[i] ~= nil and old_list[i] ~= tmp[i] then
+			fix = true;
+		end
+	end
 	ui.trustList = tmp;
 	table.sort(ui.trustList);
+	--print(ui.trustList[1]);
+	if fix then
+		for p = 1,5 do
+			local idx = 0;
+			local tmpP = T{};
+			if (ui.currentConfig.presetLists[p] ~= nil) then
+				for _, t in pairs(ui.currentConfig.presetLists[p]) do
+					idx=idx+1;
+					local toCheck = string.sub(t,6,-7);
+					--print(toCheck);
+					if FindInTable(ui.trustList,toCheck) then
+						--print('found');
+						table.insert(tmpP, t);
+					end
+				end
+			end
+			ui.currentConfig.presetLists[p] = tmpP;
+		end
+	save_settings();
+	end
 end
 
 
@@ -555,6 +581,17 @@ ashita.events.register('command', 'command_cb', function (e)
 			return;
 		end
     end
+	
+	for p = 1,5 do
+		if (#args == 3 and args[2]:any('reset') and args[3]:any(string.format('p%s', p))) then
+			if (not summoning) then
+				ui.currentConfig.presetLists[p] = T{};
+				save_settings();
+			end
+			return;
+		end
+    end
+	
 	return;
 end);
 
