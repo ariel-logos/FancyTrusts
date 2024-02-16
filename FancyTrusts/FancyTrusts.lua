@@ -134,6 +134,7 @@ end);
 
 function GetTrusts()
 	local tmp = T{};
+	old_list = ui.trustList;
 	ui.listLen = 0;
 	for i = 0, 2048 do
 		local spell = AshitaCore:GetResourceManager():GetSpellById(i);
@@ -144,22 +145,32 @@ function GetTrusts()
 		end
 	end			
 	
+	ui.trustList = tmp;
+	table.sort(ui.trustList);
+
 	local fix = false;
-	for i = 1, GetTableLen(old_list) do
-		if tmp[i] ~= nil and old_list[i] ~= tmp[i] then
-			fix = true;
+	for i = 1, math.max(GetTableLen(old_list),GetTableLen(ui.trustList)) do
+		if  ui.trustList ~= nil and	old_list ~= nil then
+			if ui.trustList[i] == nil or old_list[i] == nil or old_list[i] ~= ui.trustList[i] then
+				fix = true;
+				--print(ui.trustList[i]);
+			end
 		end
 	end
-	ui.trustList = tmp;
-	old_list = ui.trustList;
-	table.sort(ui.trustList);
-	if fix then
+	
+	--[[if fix then
+		print(fix);
+		print(tostring(GetTableLen(ui.trustList)));
+		for j = 1, GetTableLen(ui.trustList) do
+			print('-'..ui.trustList[j]);
+		end
+	end]]--
+	
+	if fix and GetTableLen(ui.trustList) > 0 then
 		for p = 1,5 do
-			local idx = 0;
 			local tmpP = T{};
 			if (ui.currentConfig.presetLists[p] ~= nil) then
 				for _, t in pairs(ui.currentConfig.presetLists[p]) do
-					idx=idx+1;
 					local toCheck = string.sub(t,6,-7);
 					--print(toCheck);
 					if FindInTable(ui.trustList,toCheck) then
@@ -527,6 +538,14 @@ end
 
 function SummonTrusts()
 	if (summoning) then
+		if GetTableLen(ui.trustList) <= 0 then
+			summoning = false;
+			summoningTimer = 0;
+			summoningIdx = 1;
+			summoningTable = 0;
+			summoningStart = 0;
+			return;
+		end
 		if (ui.currentConfig.slowMode[1]) then slowExtra = 2.6; else slowExtra = 0; end
 		if (summoningTimer >= ui.currentConfig.waitTime+slowExtra) then
 			AshitaCore:GetChatManager():QueueCommand(1, ui.currentConfig.presetLists[summoningTable][summoningIdx]);
