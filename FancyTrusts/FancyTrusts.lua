@@ -1,6 +1,6 @@
 ﻿addon.name      = 'FancyTrusts';
 addon.author    = 'Arielfy';
-addon.version   = '0.3';
+addon.version   = '0.3.1';
 addon.desc      = 'A fancy UI to manage trusts.';
 addon.link      = 'https://github.com/ariel-logos/FancyTrusts';
 
@@ -80,6 +80,8 @@ local previousFrameVisible = false;
 
 local debugMode = false;
 
+local old_list = T{};
+
 local summoning = false;
 local summoningTimer = 0;
 local summoningIdx = 1;
@@ -141,7 +143,7 @@ function GetTrusts()
 			--imgui.TextColored({ 1.0, 1.0, 1.0, 1.0 }, tostring(spell.Name[1]))					
 		end
 	end			
-	local old_list = ui.tustList;
+	
 	local fix = false;
 	for i = 1, GetTableLen(old_list) do
 		if tmp[i] ~= nil and old_list[i] ~= tmp[i] then
@@ -149,8 +151,8 @@ function GetTrusts()
 		end
 	end
 	ui.trustList = tmp;
+	old_list = ui.trustList;
 	table.sort(ui.trustList);
-	--print(ui.trustList[1]);
 	if fix then
 		for p = 1,5 do
 			local idx = 0;
