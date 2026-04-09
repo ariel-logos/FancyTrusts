@@ -1,6 +1,6 @@
 ﻿addon.name      = 'FancyTrusts';
 addon.author    = 'Arielfy';
-addon.version   = '0.3.1';
+addon.version   = '0.3.2';
 addon.desc      = 'A fancy UI to manage trusts.';
 addon.link      = 'https://github.com/ariel-logos/FancyTrusts';
 
@@ -107,8 +107,6 @@ ashita.events.register('d3d_present', 'present_cb', function()
 		imgui.Begin('trusts', true, ImGuiWindowFlags_NoResize);
 		if (imgui.BeginTabBar('##trusts_tabbar', ImGuiTabBarFlags_NoCloseWithMiddleMouseButton)) then
 			if (imgui.BeginTabItem('Debug', nil)) then
-			
-
 				imgui.TextColored({ 1.0, 1.0, 1.0, 1.0 }, debugtext);
 				if (ui.trustList ~= nil ) then
 					imgui.TextColored({ 1.0, 1.0, 1.0, 1.0 }, tostring(summoningTimer));
@@ -117,17 +115,13 @@ ashita.events.register('d3d_present', 'present_cb', function()
 				for i = 1,GetTableLen(ui.currentConfig.presetLists[1]) do 
 					imgui.TextColored({ 1.0, 1.0, 1.0, 1.0 }, ui.currentConfig.presetLists[1][i]);
 				end
-				
-				
 				--and spell.Skill == 43 and spell.LevelRequired[16 + 1] > 0
-				
-				
+				imgui.EndTabItem();	
 			end
-			imgui.EndTabItem();	
+			imgui.EndTabBar();
 		end
-		imgui.EndTabBar();
+    	imgui.End();
 	end
-    imgui.End();
 	displayUI();
 	previousFrameVisible = ui.currentConfig.isVisible;
 end);
