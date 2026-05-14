@@ -6,6 +6,10 @@ FancyTrusts is an add-on for FFXI's third-party loader and hook Ashita (https://
 The purpose of this add-on is pretty straightforward: it's a fancy UI to manage trusts.
 <br></br>
 
+<p align="center">
+  <video src="https://github.com/user-attachments/assets/02019237-4009-4dbb-99ff-735d2b4e5788" preload="none"></video>
+</p>
+
 ### How does it work?
 This add-on uses ImGui to create an overlay that allows the player to easily perform some operations with trusts otherwise very tedious or not even possible.
 <br></br>
